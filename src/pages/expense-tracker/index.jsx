@@ -2,13 +2,16 @@ import { useState } from "react";
 import { useAddTransaction } from "../../hooks/useAddTransactions";
 import { useGetTransactions } from "../../hooks/useGetTransactions";
 import { useGetUserInfo } from "../../hooks/useGetUserInfo";
+import {useGetBalance} from "../../hooks/useGetBalance";
 import { signOut } from "firebase/auth";
 import "./styles.css";
 import { auth } from "../../config/firebase-config";
 import { useNavigate } from "react-router-dom";
 
+
 export const ExpenseTracker = () => {
 
+    const {balance,income,expense} = useGetBalance();
     const {addTransaction} = useAddTransaction();
     const {transactions} = useGetTransactions();
     const {name,profilePhoto} = useGetUserInfo();
@@ -43,16 +46,16 @@ export const ExpenseTracker = () => {
                 <h1> {name}'s Expense Tracker</h1>
                 <div className="balance">
                     <h3>Your balance</h3>
-                    <h2>$0.00</h2>
+                    <h2>${balance}</h2>
                 </div>
                 <div className="summary">
                     <div className="income">
-                        <h4>Income</h4>
-                        <p>$0.00</p>
+                        <h4>income</h4>
+                        <p>${income}</p>
                     </div>
                     <div className="expenses">
-                    <h4>Income</h4>
-                    <p>$0.00</p>
+                    <h4>expense</h4>
+                    <p>${expense}</p>
                     </div>
                 </div>
                 <form className="add-transaction" onSubmit={onSubmit}>
@@ -72,7 +75,7 @@ export const ExpenseTracker = () => {
                     <button type="submit">Add Transaction</button>
                 </form>
             </div>
-            {profilePhoto && <div className="profile"><img className="profile-photo" src={profilePhoto} alt="" referrerpolicy="no-referrer" /></div>}
+            {profilePhoto && <div className="profile"><img className="profile-photo" src={profilePhoto} alt="" referrerPolicy="no-referrer" /></div>}
             <button className="sign-out-button" onClick={signUserOut}>
                 Sign out
             </button>

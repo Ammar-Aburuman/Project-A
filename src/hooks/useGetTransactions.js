@@ -4,7 +4,7 @@ import { db } from "../config/firebase-config";
 import { useGetUserInfo } from "./useGetUserInfo";
 
 export const useGetTransactions = () => {
-    const  {transactions, setTransactions} = useState([]);
+    const  [transactions, setTransactions] = useState([]);
     const transactionCollectionRef = collection(db,"transactions")
     const {userID} = useGetUserInfo();
 
@@ -12,7 +12,7 @@ export const useGetTransactions = () => {
         let unsubscribe
         try {
 
-            const queryTransactions = query(transactionCollectionRef, where("userID", "==", userID, orderBy("createdAt")) );
+            const queryTransactions = query(transactionCollectionRef, where("userID", "==", userID, orderBy("createdAt","desc")) );
 
              unsubscribe =  onSnapshot(queryTransactions, (snapshot) => {
 

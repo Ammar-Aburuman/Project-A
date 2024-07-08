@@ -11,7 +11,7 @@ export const Auth = () => {
         const results = await signInWithPopup(auth,provider)
         const authInfo = {
             userID : results.user.uid,
-            name : results.displayName,
+            name : results.user.displayName,
             profilePhoto: results.user.photoURL,
             isAuth: true,
         }

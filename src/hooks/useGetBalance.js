@@ -26,7 +26,7 @@ export const useGetBalance = () => {
         setIncome(newIncome);
         setExpense(newExpense);
         setBalance(newIncome - newExpense);
-    }, [transactions]);
+    },[transactions]);
     
     
     
